@@ -79,8 +79,8 @@ for (let i = 0; i < thumbDOMElements.length; i++) {
 
 
 // FUNZIONI
-function addImagesDynamicallyFrom(object) {
-    object.forEach((element, index) => {
+function addImagesDynamicallyFrom(arrayOfObjects) {
+    arrayOfObjects.forEach((element, index) => {
         // recupero le proprietà dell'oggetto images
         const imgSrc = element.image
         const title = element.title
