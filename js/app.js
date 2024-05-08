@@ -41,42 +41,18 @@ thumbListDivEl.classList.add('thumb_list')
 thumbsDOMEl.append(thumbListDivEl)
 
 addImagesDynamicallyFrom(images)
-
-btnDownEl.addEventListener('click', nextImage)
-btnUpEl.addEventListener('click', prevImage)
-const autoPlay = setInterval(nextImage, 3000)
-
-
-// aggiungo la classe active alla prima immagine e relative info per renderizzare in pagina solo gli elementi con della HTML collection con index = 0
+// una volta aggiunti dinamicamente i dati, recupero le collections HTML per gestire il render della prima slide e usare gli array per nextImgae e PrevImage
 const imageDOMElements = document.getElementsByClassName('image')
 const imageInfoDOMElements = document.getElementsByClassName('image_info')
-const thumbDOMElements = document.getElementsByClassName('thumb')
 const firstImageEl = imageDOMElements[0]
 const firstInfoEl = imageInfoDOMElements[0]
 firstImageEl.classList.add('active')
 firstInfoEl.classList.add('active')
-console.log(imageDOMElements)
-console.log(thumbDOMElements)
 
-for (let i = 0; i < thumbDOMElements.length; i++) {
-    const currentThumb = thumbDOMElements[i]
-    currentThumb.addEventListener('click', function () {
-        // ottengo l'indice associato al thumb cliccato
-        const thumbIndex = parseInt(currentThumb.getAttribute('data-index'))
-
-        // rimuovo la classe 'active' da tutte le immagini e relative info
-        for (let k = 0; k < imageDOMElements.length; k++) {
-            imageDOMElements[k].classList.remove('active')
-            imageInfoDOMElements[k].classList.remove('active')
-        }
-
-        // Imposta l'immagine corrispondente al thumb cliccato come attiva e ripristino la variabile di stato index = thumbIndex per sincronizzare gli eventi
-        imageDOMElements[thumbIndex].classList.add('active')
-        imageInfoDOMElements[thumbIndex].classList.add('active')
-        index = thumbIndex //sincronizzo gli indici 
-    });
-}
-
+btnDownEl.addEventListener('click', nextImage)
+btnUpEl.addEventListener('click', prevImage)
+const autoPlay = setInterval(nextImage, 3000)
+clickOnThumbnail()
 
 // FUNZIONI
 function addImagesDynamicallyFrom(arrayOfObjects) {
@@ -140,4 +116,27 @@ function prevImage() {
     index--
     imageDOMElements[index].classList.add('active')
     imageInfoDOMElements[index].classList.add('active')
+}
+
+function clickOnThumbnail() {
+const thumbDOMElements = document.getElementsByClassName('thumb')
+
+    for (let i = 0; i < thumbDOMElements.length; i++) {
+        const currentThumb = thumbDOMElements[i]
+        currentThumb.addEventListener('click', function () {
+            // ottengo l'indice associato al thumb cliccato
+            const thumbIndex = parseInt(currentThumb.getAttribute('data-index'))
+    
+            // rimuovo la classe 'active' da tutte le immagini e relative info
+            for (let k = 0; k < imageDOMElements.length; k++) {
+                imageDOMElements[k].classList.remove('active')
+                imageInfoDOMElements[k].classList.remove('active')
+            }
+    
+            // Imposta l'immagine corrispondente al thumb cliccato come attiva e ripristino la variabile di stato index = thumbIndex per sincronizzare gli eventi
+            imageDOMElements[thumbIndex].classList.add('active')
+            imageInfoDOMElements[thumbIndex].classList.add('active')
+            index = thumbIndex //sincronizzo gli indici 
+        });
+    }
 }
