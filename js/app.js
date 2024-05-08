@@ -31,6 +31,7 @@ const images = [
 
 const imagesDOMEl = document.querySelector('.images')
 const thumbsDOMEl = document.querySelector('.thumbs')
+const wrapperDOMEl = document.querySelector('.wrapper')
 const btnUpEl = document.querySelector('.btn_up')
 const btnDownEl = document.querySelector('.btn_down')
 // variabile di stato per gestire le funzioni nextImage e prevImage
@@ -51,8 +52,21 @@ firstInfoEl.classList.add('active')
 
 btnDownEl.addEventListener('click', nextImage)
 btnUpEl.addEventListener('click', prevImage)
-const autoPlay = setInterval(nextImage, 3000)
+let autoPlay = setInterval(nextImage, 3000)
 clickOnThumbnail()
+
+wrapperDOMEl.addEventListener('mouseenter', function(){
+    console.log('mouse enter')
+    clearInterval(autoPlay)
+    autoPlay = null
+})
+
+wrapperDOMEl.addEventListener('mouseleave', function(){
+    console.log('mouse leave')
+    if(!autoPlay) {
+        autoPlay = setInterval(nextImage, 3000)
+    }
+})
 
 // FUNZIONI
 function addImagesDynamicallyFrom(arrayOfObjects) {
