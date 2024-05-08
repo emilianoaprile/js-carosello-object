@@ -44,6 +44,7 @@ addImagesDynamicallyFrom(images)
 
 btnDownEl.addEventListener('click', nextImage)
 btnUpEl.addEventListener('click', prevImage)
+const autoPlay = setInterval(nextImage, 3000)
 
 
 // aggiungo la classe active alla prima immagine e relative info per renderizzare in pagina solo gli elementi con della HTML collection con index = 0
