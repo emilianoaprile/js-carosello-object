@@ -119,20 +119,20 @@ function prevImage() {
 }
 
 function clickOnThumbnail() {
-const thumbDOMElements = document.getElementsByClassName('thumb')
+    const thumbDOMElements = document.getElementsByClassName('thumb')
 
     for (let i = 0; i < thumbDOMElements.length; i++) {
         const currentThumb = thumbDOMElements[i]
         currentThumb.addEventListener('click', function () {
             // ottengo l'indice associato al thumb cliccato
             const thumbIndex = parseInt(currentThumb.getAttribute('data-index'))
-    
+
             // rimuovo la classe 'active' da tutte le immagini e relative info
             for (let k = 0; k < imageDOMElements.length; k++) {
                 imageDOMElements[k].classList.remove('active')
                 imageInfoDOMElements[k].classList.remove('active')
             }
-    
+
             // Imposta l'immagine corrispondente al thumb cliccato come attiva e ripristino la variabile di stato index = thumbIndex per sincronizzare gli eventi
             imageDOMElements[thumbIndex].classList.add('active')
             imageInfoDOMElements[thumbIndex].classList.add('active')
